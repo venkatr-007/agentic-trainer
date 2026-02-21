@@ -34,50 +34,73 @@ python -m venv .venv
 .\.venv\Scripts\activate
 python -m pip install --upgrade pip setuptools wheel
 pip install -e .
-Train (local)
+```
+
+## Train (local)
+
+```powershell
 agentic-train --data .\data\mydata.csv --out .\out\run1 --target <TARGET_COLUMN>
+```
+
 If you want auto-target selection + prompts when ambiguous:
 
+```powershell
 agentic-train --data .\data\mydata.csv --out .\out\run1 --interactive
+```
+
 Open the report:
 
+```powershell
 start .\out\run1\report.html
-Demo datasets (Kaggle)
-1) Telco churn (classification)
+```
+
+## Demo datasets (Kaggle)
+
+### 1) Telco churn (classification)
+
+```powershell
 mkdir .\data\telco -Force
 kaggle datasets download -d blastchar/telco-customer-churn -p .\data\telco
 Expand-Archive .\data\telco\telco-customer-churn.zip -DestinationPath .\data\telco -Force
 agentic-train --data .\data\telco\WA_Fn-UseC_-Telco-Customer-Churn.csv --out .\out\telco --target Churn
 start .\out\telco\report.html
-2) Diamonds (regression)
+```
+
+### 2) Diamonds (regression)
+
+```powershell
 mkdir .\data\diamonds -Force
 kaggle datasets download -d shivam2503/diamonds -p .\data\diamonds
 Expand-Archive .\data\diamonds\diamonds.zip -DestinationPath .\data\diamonds -Force
 agentic-train --data .\data\diamonds\diamonds.csv --out .\out\diamonds --target price
 start .\out\diamonds\report.html
-3) Iris (multiclass classification)
+```
+
+### 3) Iris (multiclass classification)
+
+```powershell
 mkdir .\data\iris -Force
 kaggle datasets download -d uciml/iris -p .\data\iris
 Expand-Archive .\data\iris\iris.zip -DestinationPath .\data\iris -Force
 agentic-train --data .\data\iris\Iris.csv --out .\out\iris --target Species
 start .\out\iris\report.html
-Serve (FastAPI)
-agentic-train --serve --model .\out\run1\model.joblib --schema .\out\run1\schema.json
-Then open:
+```
 
-http://127.0.0.1:8000/docs
+## Serve (FastAPI)
+
+```powershell
+agentic-train --serve --model .\out\run1\model.joblib --schema .\out\run1\schema.json
+```
+
+Then open:
+- http://127.0.0.1:8000/docs
 
 Endpoints:
+- `GET /health`
+- `GET /schema`
+- `POST /predict` with payload: `{"rows":[{...},{...}]}`
 
-GET /health
-
-GET /schema
-
-POST /predict with payload: {"rows":[{...},{...}]}
-
-Notes
-“Top Features” method:
-
-logreg_coef for LogisticRegression
-
-permutation_importance for tree models where applicable
+## Notes
+- “Top Features” method:
+  - `logreg_coef` for LogisticRegression
+  - `permutation_importance` for tree models where applicable
