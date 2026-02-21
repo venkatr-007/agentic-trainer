@@ -10,3 +10,5 @@ data/
 agentic_trainer.egg-info/
 dist/
 build/
+.env
+.env.*
