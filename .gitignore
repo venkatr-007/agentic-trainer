@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.idea/
+out/
+data/
+.kaggle/
+*.zip
+*.joblib
+agentic_trainer.egg-info/
+dist/
+build/
