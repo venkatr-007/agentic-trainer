@@ -1,5 +1,8 @@
 # agentic-trainer
 
+## Overview
+Exploring retrieval-aware LLM pipelines and agentic workflows, including structured data ingestion, model selection, and deployable ML pipelines.
+
 Agentic AutoML-lite trainer for tabular **CSV/XLSX**:
 
 - Builds an explicit **plan** and logs decisions
